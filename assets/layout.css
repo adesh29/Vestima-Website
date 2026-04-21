@@ -209,20 +209,23 @@
     display: none;
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(255,255,255,0.97);
-    backdrop-filter: blur(20px);
+    background: #ffffff;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    z-index: 99;
+    z-index: 9999;
   }
   .nav-links.open { display: flex; }
   .nav-links a {
-    font-size: 24px;
+    font-size: 22px;
     padding: 14px 32px;
+    color: var(--primary-800) !important;
+    background: none !important;
   }
+  .nav-links a::before { display: none; }
   .header-cta { display: none; }
+  .nav-toggle { z-index: 10000; position: relative; }
 }
 
 /* FOOTER — deep navy with subtle blue waves */
