@@ -5,18 +5,40 @@
   const navToggle = document.getElementById('navToggle');
   const navLinks  = document.querySelector('.nav-links');
   if (navToggle && navLinks) {
+    // Build a separate fullscreen overlay appended to body (avoids CSS transform clipping)
+    const mobileMenu = document.createElement('div');
+    mobileMenu.id = 'mobileMenu';
+    mobileMenu.style.cssText = [
+      'display:none',
+      'position:fixed',
+      'top:0','left:0','right:0','bottom:0',
+      'background:#fff',
+      'z-index:9999',
+      'flex-direction:column',
+      'align-items:center',
+      'justify-content:center',
+      'gap:8px',
+    ].join(';');
+
+    // Clone nav links into overlay
+    navLinks.querySelectorAll('a').forEach(a => {
+      const link = document.createElement('a');
+      link.href = a.href;
+      link.textContent = a.textContent;
+      link.style.cssText = 'font-size:22px;font-weight:500;color:#132B3C;padding:14px 32px;text-decoration:none;font-family:var(--font-body)';
+      link.addEventListener('click', () => {
+        mobileMenu.style.display = 'none';
+        navToggle.classList.remove('open');
+      });
+      mobileMenu.appendChild(link);
+    });
+    document.body.appendChild(mobileMenu);
+
     navToggle.addEventListener('click', () => {
       navToggle.classList.toggle('open');
-      navLinks.classList.toggle('open');
-    });
-    navLinks.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => {
-        navToggle.classList.remove('open');
-        navLinks.classList.remove('open');
-      });
+      mobileMenu.style.display = mobileMenu.style.display === 'flex' ? 'none' : 'flex';
     });
   }
-  // Always ensure body scroll is not locked on page load
   document.body.style.overflow = '';
 
   // ===== Header scroll state =====
