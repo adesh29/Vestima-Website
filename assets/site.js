@@ -8,16 +8,16 @@
     navToggle.addEventListener('click', () => {
       navToggle.classList.toggle('open');
       navLinks.classList.toggle('open');
-      document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
     });
     navLinks.querySelectorAll('a').forEach(a => {
       a.addEventListener('click', () => {
         navToggle.classList.remove('open');
         navLinks.classList.remove('open');
-        document.body.style.overflow = '';
       });
     });
   }
+  // Always ensure body scroll is not locked on page load
+  document.body.style.overflow = '';
 
   // ===== Header scroll state =====
   const header = document.querySelector('.site-header');
