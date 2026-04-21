@@ -192,6 +192,10 @@ html.pt-incoming .page-transition .pt-logo { opacity: 1 !important; transform: t
 
 /* Reserve scrollbar space so content doesn't shift right when overlay covers */
 html { scrollbar-gutter: stable; scrollbar-color: var(--tertiary-300) transparent; scrollbar-width: thin; }
+
+@media (max-width: 640px) {
+  :root { --gutter: 20px; }
+}
 ::-webkit-scrollbar { width: 10px; height: 10px; }
 ::-webkit-scrollbar-thumb { background: var(--tertiary-300); border-radius: 10px; }
 ::-webkit-scrollbar-track { background: transparent; }
