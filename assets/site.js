@@ -20,15 +20,25 @@
       'gap:8px',
     ].join(';');
 
-    // Clone nav links into overlay
+    // Clone nav links into overlay with page transition support
     navLinks.querySelectorAll('a').forEach(a => {
       const link = document.createElement('a');
-      link.href = a.href;
+      link.href = a.getAttribute('href');
       link.textContent = a.textContent;
       link.style.cssText = 'font-size:22px;font-weight:500;color:#132B3C;padding:14px 32px;text-decoration:none;font-family:var(--font-body)';
-      link.addEventListener('click', () => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
         mobileMenu.style.display = 'none';
         navToggle.classList.remove('open');
+        const dest = link.getAttribute('href');
+        const ptOverlay = document.getElementById('ptOverlay');
+        if (ptOverlay) {
+          ptOverlay.classList.add('anim-up');
+          sessionStorage.setItem('pt-incoming', '1');
+          setTimeout(() => { window.location.href = dest; }, 220);
+        } else {
+          window.location.href = dest;
+        }
       });
       mobileMenu.appendChild(link);
     });
